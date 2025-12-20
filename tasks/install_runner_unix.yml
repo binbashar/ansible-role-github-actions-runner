@@ -77,10 +77,10 @@
 - name: Register runner  # noqa no-changed-when
   environment:
     RUNNER_ALLOW_RUNASROOT: "1"
+    ACTIONS_RUNNER_INPUT_TOKEN: "{{ registration.json.token }}"
   ansible.builtin.command:
     "{{ runner_dir }}/./config.sh \
     --url {{ github_full_url }} \
-    --token {{ registration.json.token }} \
     --name '{{ runner_name }}' \
     --labels {{ runner_labels | join(',') }} \
     --runnergroup {{ runner_group }} \
@@ -116,10 +116,10 @@
 - name: Replace registered runner  # noqa no-changed-when
   environment:
     RUNNER_ALLOW_RUNASROOT: "1"
+    ACTIONS_RUNNER_INPUT_TOKEN: "{{ registration.json.token }}"
   ansible.builtin.command:
     "{{ runner_dir }}/config.sh \
     --url {{ github_full_url }} \
-    --token {{ registration.json.token }} \
     --name '{{ runner_name }}' \
     --labels {{ runner_labels | join(',') }} \
     --unattended \

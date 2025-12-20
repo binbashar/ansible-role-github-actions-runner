@@ -31,7 +31,8 @@
 - name: Unregister runner from the GitHub
   environment:
     RUNNER_ALLOW_RUNASROOT: "1"
-  ansible.windows.win_command: "config.cmd remove --token {{ registration.json.token }} --name {{ runner_name }} --unattended"
+    ACTIONS_RUNNER_INPUT_TOKEN: "{{ registration.json.token }}"
+  ansible.windows.win_command: "config.cmd remove --name {{ runner_name }} --unattended"
   args:
     chdir: "{{ runner_dir }}"
   become: true
